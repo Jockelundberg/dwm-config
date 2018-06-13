@@ -27,6 +27,7 @@ Now create the new patch file
 > git diff --no-prefix > ../my_changes.diff
 
 Now I commit this change to this reposity and push it here:
+> cd ..
 > git commit -a -m "My new patch, doing this awesome stuff."
 
 Build and install the package using arch's pacman:
