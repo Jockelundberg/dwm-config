@@ -1,7 +1,7 @@
-diff --git a/config.def.h b/config.def.h
+diff --git config.def.h config.def.h
 index 7054c06..d0a9715 100644
---- a/config.def.h
-+++ b/config.def.h
+--- config.def.h
++++ config.def.h
 @@ -42,7 +42,7 @@ static const Layout layouts[] = {
  };
  
@@ -47,10 +47,10 @@ index 7054c06..d0a9715 100644
  	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
  	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
  	TAGKEYS(                        XK_1,                      0)
-diff --git a/config.mk b/config.mk
+diff --git config.mk config.mk
 index 7a2fb12..216a510 100644
---- a/config.mk
-+++ b/config.mk
+--- config.mk
++++ config.mk
 @@ -4,7 +4,7 @@ VERSION = 6.1
  # Customize below to fit your system
  
