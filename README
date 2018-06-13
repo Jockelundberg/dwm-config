@@ -1,0 +1,32 @@
+# Reminder to myself of how to use/generate the patch file.
+Get the dwm source repository
+
+> curl -O dl.suckless.org/dwm/dwm-6.1.tar.gz
+
+Extract and move into it
+> tar -xzf dwm-6.1.tar.gz
+> cd dwm-6.1
+
+Initialize a git archive and commit the original source
+> git init
+> git add .
+> git commit -m "Initial commit"
+
+Now make any changes you'd like, for instance apply the patch my_changes.diff
+(assuming it is in the directory above)
+> patch < ../my_changes.diff
+
+Make any further changes.
+> ...(?)
+
+Now create the new patch file
+> git diff --no-prefix > ../my_changes.diff
+
+Now I commit this change to this reposity and push it here:
+> git commit -a -m "My new patch, doing this awesome stuff."
+
+Build and install the package using arch's pacman:
+> makepkg
+> sudo pacman -U dwm-6.1-1-x86_64.pkg.tar.xz
+
+? Profit!
