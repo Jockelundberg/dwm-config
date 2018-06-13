@@ -1,10 +1,17 @@
-# Reminder to myself of how to use/generate the patch file.
-Get the dwm source repository
+# Reminder to myself of how to use/generate the patch file and install the package
+Get this repository
+> git clone git@github.com:Jockelundberg/dwm-config.git
+> cd dwm-config
+
+Get the dwm source repository and extract it by doing
 
 > curl -O dl.suckless.org/dwm/dwm-6.1.tar.gz
-
-Extract and move into it
 > tar -xzf dwm-6.1.tar.gz
+
+(Alternatively, use makepkg -o to download and extract the sources. But then you must
+make sure to move the patch file into the correct place in a later step.)
+
+Move into it
 > cd dwm-6.1
 
 Initialize a git archive and commit the original source
