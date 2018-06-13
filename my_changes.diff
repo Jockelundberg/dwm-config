@@ -1,0 +1,86 @@
+diff --git a/config.def.h b/config.def.h
+index 7054c06..d0a9715 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -42,7 +42,7 @@ static const Layout layouts[] = {
+ };
+ 
+ /* key definitions */
+-#define MODKEY Mod1Mask
++#define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+@@ -56,16 +56,22 @@ static const Layout layouts[] = {
+ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+ static const char *termcmd[]  = { "st", NULL };
++static const char *slockcmd[] = { "slock", NULL };
++static const char *oblogoutcmd[] = { "oblogout", NULL };
++static const char *chromiumcmd[] = { "chromium", NULL };
+ 
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
++        { MODKEY|ShiftMask,             XK_i,      spawn,          {.v = chromiumcmd } },
++        { MODKEY,                       XK_x,      spawn,          {.v = oblogoutcmd } },
++	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+ 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+ 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
++	{ MODKEY,                       XK_comma,  incnmaster,     {.i = +1 } },
++	{ MODKEY,                       XK_period, incnmaster,     {.i = -1 } },
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+ 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+ 	{ MODKEY,                       XK_Return, zoom,           {0} },
+@@ -78,8 +84,8 @@ static Key keys[] = {
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+ 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
++	{ MODKEY,                       XK_i,      focusmon,       {.i = -1 } },
++	{ MODKEY,                       XK_d,      focusmon,       {.i = +1 } },
+ 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+ 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+ 	TAGKEYS(                        XK_1,                      0)
+diff --git a/config.mk b/config.mk
+index 7a2fb12..216a510 100644
+--- a/config.mk
++++ b/config.mk
+@@ -4,7 +4,7 @@ VERSION = 6.1
+ # Customize below to fit your system
+ 
+ # paths
+-PREFIX = /usr/local
++PREFIX = /usr
+ MANPREFIX = ${PREFIX}/share/man
+ 
+ X11INC = /usr/X11R6/include
+@@ -17,22 +17,16 @@ XINERAMAFLAGS = -DXINERAMA
+ # freetype
+ FREETYPELIBS = -lfontconfig -lXft
+ FREETYPEINC = /usr/include/freetype2
+-# OpenBSD (uncomment)
+-FREETYPEINC = ${X11INC}/freetype2
+ 
+ # includes and libs
+ INCS = -I${X11INC} -I${FREETYPEINC}
+ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS}
+ 
+ # flags
+-CPPFLAGS = -D_BSD_SOURCE -D_POSIX_C_SOURCE=2 -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
++CPPFLAGS = -D_DEFAULT_SOURCE -D_POSIX_C_SOURCE=2 -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+ #CFLAGS   = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
+ CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os ${INCS} ${CPPFLAGS}
+ LDFLAGS  = -s ${LIBS}
+ 
+-# Solaris
+-#CFLAGS = -fast ${INCS} -DVERSION=\"${VERSION}\"
+-#LDFLAGS = ${LIBS}
+-
+ # compiler and linker
+ CC = cc
