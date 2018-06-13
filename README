@@ -1,3 +1,13 @@
+# To only install dwm with this config, use
+
+> git clone git@github.com:Jockelundberg/dwm-config.git
+> cd dwm-config
+> makepkg
+> sudo pacman -U dwm-6.1-1-x86_64.pkg.tar.xz
+
+and that's it.
+
+
 # Reminder to myself of how to use/generate the patch file and install the package
 Get this repository
 > git clone git@github.com:Jockelundberg/dwm-config.git
