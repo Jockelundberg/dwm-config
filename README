@@ -1,3 +1,13 @@
+# To only install dwm with this config, use
+
+> git clone git@github.com:Jockelundberg/dwm-config.git
+> cd dwm-config
+> makepkg
+> sudo pacman -U dwm-6.1-1-x86_64.pkg.tar.xz
+
+and that's it.
+
+
 # Reminder to myself of how to use/generate the patch file and install the package
 Get this repository
 > git clone git@github.com:Jockelundberg/dwm-config.git
@@ -7,9 +17,6 @@ Get the dwm source repository and extract it by doing
 
 > curl -O dl.suckless.org/dwm/dwm-6.1.tar.gz
 > tar -xzf dwm-6.1.tar.gz
-
-(Alternatively, use makepkg -o to download and extract the sources. But then you must
-make sure to move the patch file into the correct place in a later step.)
 
 Move into it
 > cd dwm-6.1
@@ -30,7 +37,13 @@ Now create the new patch file
 > git diff --no-prefix > ../my_changes.diff
 
 Now I commit this change to this reposity and push it here:
+> cd ..
 > git commit -a -m "My new patch, doing this awesome stuff."
+
+You can also remove the dwm-6.1 folder, if you're done with making the new
+patch file. But it is not necessary to build the package, and should not
+interfere if it is not removed.
+> rm -rf dwm-6.1
 
 Build and install the package using arch's pacman:
 > makepkg
